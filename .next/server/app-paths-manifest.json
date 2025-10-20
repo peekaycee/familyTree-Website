@@ -1,8 +1,0 @@
-{
-  "/dashboard/page": "app/dashboard/page.js",
-  "/dashboard/events/page": "app/dashboard/events/page.js",
-  "/dashboard/stories/page": "app/dashboard/stories/page.js",
-  "/dashboard/settings/page": "app/dashboard/settings/page.js",
-  "/page": "app/page.js",
-  "/dashboard/family-tree/page": "app/dashboard/family-tree/page.js"
-}
