@@ -1,0 +1,4 @@
+.nav { display:flex; justify-content:space-between; align-items:center; padding:0.75rem 1.25rem; background:var(--color-primary); color:white; }
+.brand a { color: white; font-weight:700; text-decoration:none; }
+.links a { margin-left:1rem; color: white; text-decoration:none; }
+.logout { background:transparent; padding:0.25rem 0.5rem; border-radius:6px; border:1px solid rgba(255,255,255,0.2); }
