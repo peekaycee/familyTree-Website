@@ -24,46 +24,11 @@
       "static/css/app/contact/page.css",
       "static/chunks/app/contact/page.js"
     ],
-    "/auth/login/page": [
+    "/auth/register/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/auth/login/page.css",
-      "static/chunks/app/auth/login/page.js"
-    ],
-    "/api/auth/login/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/auth/login/route.js"
-    ],
-    "/dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/dashboard/page.css",
-      "static/chunks/app/dashboard/page.js"
-    ],
-    "/dashboard/timeline/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/dashboard/timeline/page.css",
-      "static/chunks/app/dashboard/timeline/page.js"
-    ],
-    "/dashboard/events/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/dashboard/events/page.css",
-      "static/chunks/app/dashboard/events/page.js"
-    ],
-    "/dashboard/settings/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/dashboard/settings/page.css",
-      "static/chunks/app/dashboard/settings/page.js"
-    ],
-    "/dashboard/family-tree/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/dashboard/family-tree/page.css",
-      "static/chunks/app/dashboard/family-tree/page.js"
+      "static/css/app/auth/register/page.css",
+      "static/chunks/app/auth/register/page.js"
     ]
   }
 }
