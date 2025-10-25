@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import styles from './Navbar.module.css'
+import styles from './components.module.css'
 import { useEffect, useState } from 'react'
 
 export default function Navbar() {

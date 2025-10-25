@@ -1,15 +1,19 @@
-import '../styles/globals.css';
-import styles from '../styles/layout.module.css'
-import Navbar from '../components/Navbar'
-import { ReactNode } from 'react'
+// @ts-ignore
+import './globals.css';
+import Navbar from '../components/Navbar';
+import { ReactNode } from 'react';
+import PageTransition from './PageTransition';
+import Footer from '../components/Footer';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={styles.body}>
+      <body>
         <Navbar />
-        <main className={styles.main}>{children}</main>
-        <footer className={styles.footer}>© 2025 FamilyTree - Preserve Your Legacy</footer>
+        <PageTransition>
+            {children}
+        </PageTransition>
+        <Footer />
       </body>
     </html>
   )

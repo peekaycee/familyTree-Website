@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Dashboard() {
   return (
-    <div className={styles.container}>
+    <div className={styles.dashboardContainer}>
       <h1>Your Family Dashboard</h1>
       <p>Overview of recent activity, invites, and quick actions.</p>
       <div className={styles.grid}>
