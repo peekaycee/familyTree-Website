@@ -4,7 +4,7 @@ import styles from './contact.module.css'
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSent(true)
   }
