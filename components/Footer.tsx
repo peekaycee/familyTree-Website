@@ -1,6 +1,5 @@
 import styles from './components.module.css'
 import Link from 'next/link'
-import ModalMessage from './passwordAlert' 
 
 export default function Footer(){
   return(
