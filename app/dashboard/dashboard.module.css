@@ -1,4 +1,8 @@
-.dashboardContainer { 
+.dashboardPage {
+  width: 100%;
+  height: calc(100vh - 10em);
+}
+.Container { 
   padding: 2rem; 
   max-width: 1100px; 
   margin: 2rem auto; 

@@ -27,16 +27,18 @@ export default function Register() {
   }
 
   return (
-    <div className={styles.authContainer}>
-      <h2>Create Your FamilyTree Account</h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input value={name} onChange={(e)=>setName(e.target.value)} type="text" placeholder="Full Name" required />
-        <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="Email" required />
-        <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" required />
-        <button type="submit">Register</button>
-        {error && <p style={{color:'red'}}>{error}</p>}
-      </form>
-      <p>Already have an account? <a href="/auth/login">Login</a></p>
-    </div>
+    <section className={styles.authPage}>
+      <div className={styles.Container}>
+        <h2>Create Your FamilyTree Account</h2>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input value={name} onChange={(e)=>setName(e.target.value)} type="text" placeholder="Full Name" required autoFocus />
+          <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="Email" required />
+          <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" required />
+          <button type="submit">Register</button>
+          {error && <p style={{color:'red'}}>{error}</p>}
+        </form>
+        <p>Already have an account? <a href="/auth/login">Login</a></p>
+      </div>
+    </section>
   )
 }

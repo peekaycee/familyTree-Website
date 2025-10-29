@@ -14,7 +14,7 @@ export default function Contact() {
       <p>For help, send us a message and we'll get back to you.</p>
       {sent ? <p>Thanks — we'll reply soon.</p> : (
         <form onSubmit={handleSubmit} className={styles.form}>
-          <input placeholder="Your name" required/>
+          <input placeholder="Your name" required autoFocus/>
           <input placeholder="Email" type="email" required/>
           <textarea placeholder="How can we help?" required/>
           <button type="submit">Send</button>

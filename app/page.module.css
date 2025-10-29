@@ -1,4 +1,3 @@
-/* Original design preserved */
 .homepage { 
   width: 100%;
   height: auto;
@@ -11,6 +10,7 @@
   background-color: var(--color-primary); 
   background-blend-mode: overlay; 
 }
+/* I love you ~ ch  */
 .heroText{
   width: 45%;
   height: 100%;
@@ -303,7 +303,7 @@
   .hero {
     flex-direction: column;
     text-align: center;
-    height: 87vh;
+    height: 80vh;
     padding: 2em 1em;
   }
   .heroText {

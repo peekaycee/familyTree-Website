@@ -6,11 +6,11 @@ import Image from 'next/image';
 import { Icon } from '../public/images/index';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { testimonies } from './constants/Testimonies.ts';
+import { testimonies } from './constants/Testimonies';
 import Button from '../components/Button';
 import { useRouter } from "next/navigation";
 
-export default function Home({tag}) {
+export default function Home() {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const goToBasicPlanRegistration = () => router.push("/basic");
@@ -26,7 +26,7 @@ export default function Home({tag}) {
   }, [testimonies.length]);
 
   return (
-    <main className={styles.homepage}>
+    <section className={styles.homepage}>
       <section className={styles.hero}>
         <div className={styles.heroText}>
           <h1>Preserve Your Legacy, Share Your Story.</h1>
@@ -161,6 +161,6 @@ export default function Home({tag}) {
         </div>
       </div>
     </section>
-    </main>
+  </section>
   )
 }

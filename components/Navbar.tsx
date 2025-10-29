@@ -10,7 +10,7 @@ export default function Navbar() {
     // check cookie presence
     setLoggedIn(document.cookie.split(';').some(c => c.trim().startsWith('familytree_session=')))
   }, [])
-
+  
   return (
     <nav className={styles.nav}>
       <div className={styles.brand}><Link href='/'>FamilyTree</Link></div>

@@ -9,7 +9,7 @@ export default function Login() {
   const [error, setError] = useState('')
   const router = useRouter()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
     setError('')
     const res = await fetch('/api/auth/login', {
@@ -26,15 +26,17 @@ export default function Login() {
   }
 
   return (
-    <div className={styles.authContainer}>
-      <h2>Login to Your FamilyTree Account</h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" required />
-        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-        {error && <p style={{color:'red'}}>{error}</p>}
-      </form>
-      <p>Don't have an account? <a href="/auth/register">Register</a></p>
-    </div>
+    <section className={styles.authPage}>
+      <div className={styles.Container}>
+        <h2>Login to Your FamilyTree Account</h2>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" required autoFocus/>
+          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+          {error && <p className={styles.errorMessage}>{error}</p>}
+        </form>
+        <p>Don't have an account? <a href="/auth/register">Register</a></p>
+      </div>
+    </section>
   )
 }
