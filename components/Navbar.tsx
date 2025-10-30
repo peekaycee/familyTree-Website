@@ -1,30 +1,152 @@
 'use client'
 import Link from 'next/link'
+import { useEffect, useState, useRef } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import Button from './Button'
 import styles from './components.module.css'
-import { useEffect, useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const drawerRef = useRef<HTMLDivElement | null>(null)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const checkLoginStatus = () => {
+    try {
+      const flag = localStorage.getItem('ft_logged_in')
+      if (flag === '1') {
+        setLoggedIn(true)
+        return
+      }
+    } catch (e) {}
+
+    const cookies =
+      typeof document !== 'undefined'
+        ? document.cookie.split(';').map((c) => c.trim())
+        : []
+    const hasSession = cookies.some((c) => c.startsWith('familytree_session='))
+    setLoggedIn(hasSession)
+  }
 
   useEffect(() => {
-    // check cookie presence
-    setLoggedIn(document.cookie.split(';').some(c => c.trim().startsWith('familytree_session=')))
-  }, [])
-  
+    checkLoginStatus()
+
+    const onAuthChange = () => setTimeout(checkLoginStatus, 120)
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'ft_last_changed') setTimeout(checkLoginStatus, 60)
+    }
+
+    window.addEventListener('authChange', onAuthChange)
+    window.addEventListener('storage', onStorage)
+
+    return () => {
+      window.removeEventListener('authChange', onAuthChange)
+      window.removeEventListener('storage', onStorage)
+    }
+  }, [pathname])
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const drawer = drawerRef.current
+      const hamburger = document.querySelector(`.${styles.hamburger}`)
+      if (
+        menuOpen &&
+        drawer &&
+        !drawer.contains(e.target as Node) &&
+        !hamburger?.contains(e.target as Node)
+      ) {
+        setMenuOpen(false)
+      }
+    }
+
+    // use 'click' instead of 'mousedown' for better outside detection
+    document.addEventListener('click', handleClickOutside, true)
+    return () => document.removeEventListener('click', handleClickOutside, true)
+  }, [menuOpen])
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' })
+    } catch (err) {
+      console.error('Logout error:', err)
+    }
+
+    try {
+      localStorage.removeItem('ft_logged_in')
+      localStorage.setItem('ft_last_changed', String(Date.now()))
+    } catch (e) {}
+
+    window.dispatchEvent(new Event('authChange'))
+    router.push('/')
+  }
+
+  const toggleMenu = () => setMenuOpen(!menuOpen)
+  const closeMenu = () => setMenuOpen(false)
+
   return (
     <nav className={styles.nav}>
-      <div className={styles.brand}><Link href='/'>FamilyTree</Link></div>
+      <div className={styles.brand}>
+        {loggedIn ? (
+          <Link href="/homePage">TheFamilyTree</Link>
+        ) : (
+          <Link href="/">TheFamilyTree</Link>
+        )}
+      </div>
+
+      {/* Desktop Links */}
       <div className={styles.links}>
-        <Link href='/'>Home</Link>
-        <Link href='/about'>About</Link>
-        <Link href='/contact'>Contact</Link>
         {loggedIn ? (
           <>
-            <Link href='/dashboard'>Dashboard</Link>
-            <Link href='/auth/logout' className={styles.logout}>Logout</Link>
+            <Link href="/homePage">Home</Link>
+            <Link href="/aboutPage">About</Link>
+            <Link href="/dashboard">Dashboard</Link>
+            <Button
+              onClick={handleLogout}
+              tag={'Logout'}
+              className={styles.logout}
+            />
           </>
         ) : (
-          <Link href='/auth/login'>Login</Link>
+          <>
+            <Link href="/">Home</Link>
+            <Link href="/about">About</Link>
+            <Link href="/contact">Contact</Link>
+            <Link href="/auth/login">Login</Link>
+          </>
+        )}
+      </div>
+
+      {/* Hamburger Icon */}
+      <div className={styles.hamburger} onClick={toggleMenu}>
+        {menuOpen ? <X size={28} /> : <Menu size={28} />}
+      </div>
+
+      {/* Slide-in Side Menu */}
+      <div
+        ref={drawerRef}
+        className={`${styles.mobileDrawer} ${menuOpen ? styles.showDrawer : ''}`}
+      >
+        {loggedIn ? (
+          <>
+            <Link href="/homePage" onClick={closeMenu}>Home</Link>
+            <Link href="/aboutPage" onClick={closeMenu}>About</Link>
+            <Link href="/dashboard" onClick={closeMenu}>Dashboard</Link>
+            <button
+              onClick={() => { handleLogout(); closeMenu(); }}
+              className={styles.mobileLogout}
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link href="/" onClick={closeMenu}>Home</Link>
+            <Link href="/about" onClick={closeMenu}>About</Link>
+            <Link href="/contact" onClick={closeMenu}>Contact</Link>
+            <Link href="/auth/login" onClick={closeMenu}>Login</Link>
+          </>
         )}
       </div>
     </nav>

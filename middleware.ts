@@ -3,25 +3,35 @@ import type { NextRequest } from 'next/server'
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get('familytree_session')?.value
-  const url = req.nextUrl.clone()
+  const { pathname } = req.nextUrl
 
-  const isAuthPath = req.nextUrl.pathname.startsWith('/auth')
-  const isApi = req.nextUrl.pathname.startsWith('/api')
+  const isAuthPath = pathname.startsWith('/auth')
+  const isApi = pathname.startsWith('/api')
+  const isDashboard = pathname.startsWith('/dashboard')
 
-  if (!token && !isAuthPath && !isApi && req.nextUrl.pathname.startsWith('/dashboard')) {
-    url.pathname = '/auth/login'
-    return NextResponse.redirect(url)
+  // Allow API, _next, static files, etc.
+  if (isApi || pathname.startsWith('/_next') || pathname.includes('.') || pathname.startsWith('/static')) {
+    return NextResponse.next()
   }
 
-  // If logged in and trying to access auth pages, redirect to dashboard
-  if (token && isAuthPath) {
-    url.pathname = '/dashboard'
-    return NextResponse.redirect(url)
+  // Protect dashboard if not logged in
+  if (!token && isDashboard) {
+    const loginUrl = req.nextUrl.clone()
+    loginUrl.pathname = '/auth/login'
+    loginUrl.searchParams.set('from', pathname)
+    return NextResponse.redirect(loginUrl)
+  }
+
+  // If logged in and trying to visit auth routes (except logout), redirect to dashboard
+  if (token && isAuthPath && !pathname.startsWith('/auth/logout')) {
+    const dashboardUrl = req.nextUrl.clone()
+    dashboardUrl.pathname = '/dashboard'
+    return NextResponse.redirect(dashboardUrl)
   }
 
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/auth/:path*']
+  matcher: ['/dashboard/:path*', '/auth/:path*'],
 }

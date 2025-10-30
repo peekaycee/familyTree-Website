@@ -1,15 +1,29 @@
+// /app/api/auth/register/route.ts
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
-  const body = await request.json()
-  const { name, email } = body || {}
-  if (!name || !email) {
-    return NextResponse.json({ message: 'Name and email required' }, { status: 400 })
-  }
+  try {
+    const { name, email, password } = await request.json()
 
-  // In production, create user record here.
-  const cookie = 'familytree_session=1; Path=/; HttpOnly; SameSite=Lax; Max-Age=3600'
-  const res = NextResponse.json({ ok: true })
-  res.headers.set('Set-Cookie', cookie)
-  return res
+    if (!name || !email || !password) {
+      return NextResponse.json({ message: 'Name, email and password are required' }, { status: 400 })
+    }
+
+    // TODO: save user in DB
+    // Mock session token creation
+    const sessionToken = `sess_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`
+
+    const res = NextResponse.json({ message: 'Registration successful' })
+    res.cookies.set('familytree_session', sessionToken, {
+      httpOnly: true,
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 60 * 60 * 24, // 1 day
+    })
+    return res
+  } catch (err) {
+    console.error('Register error:', err)
+    return NextResponse.json({ message: 'Server error' }, { status: 500 })
+  }
 }

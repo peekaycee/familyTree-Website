@@ -1,12 +1,15 @@
 .adminPage {
   width: 100%;
-  height: calc(100vh - 10em);
+  min-height: calc(100vh - 10em);
+  height: auto;
+  padding: 0 2em;
 }
 .passwordPage,
 .Container { 
   padding: 2rem; 
   max-width: 1100px; 
   margin: 0.5em auto; 
+  height: auto;
 }
 .passwordPage{
   width: 100%;

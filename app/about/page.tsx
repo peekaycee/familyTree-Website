@@ -20,30 +20,6 @@ export default function About() {
         <div><h3>Mission</h3><p>Preserve family legacies with dignity and privacy.</p></div>
         <div><h3>Vision</h3><p>Be the trusted home for family histories worldwide.</p></div>
       </section>
-      <section className={styles.values}>
-        <div><h3>Mission</h3><p>Preserve family legacies with dignity and privacy.</p></div>
-        <div><h3>Vision</h3><p>Be the trusted home for family histories worldwide.</p></div>
-      </section>
-      <section className={styles.values}>
-        <div><h3>Mission</h3><p>Preserve family legacies with dignity and privacy.</p></div>
-        <div><h3>Vision</h3><p>Be the trusted home for family histories worldwide.</p></div>
-      </section>
-      <section className={styles.values}>
-        <div><h3>Mission</h3><p>Preserve family legacies with dignity and privacy.</p></div>
-        <div><h3>Vision</h3><p>Be the trusted home for family histories worldwide.</p></div>
-      </section>
-      <section className={styles.values}>
-        <div><h3>Mission</h3><p>Preserve family legacies with dignity and privacy.</p></div>
-        <div><h3>Vision</h3><p>Be the trusted home for family histories worldwide.</p></div>
-      </section>
-      <section className={styles.values}>
-        <div><h3>Mission</h3><p>Preserve family legacies with dignity and privacy.</p></div>
-        <div><h3>Vision</h3><p>Be the trusted home for family histories worldwide.</p></div>
-      </section>
-      <section className={styles.values}>
-        <div><h3>Mission</h3><p>Preserve family legacies with dignity and privacy.</p></div>
-        <div><h3>Vision</h3><p>Be the trusted home for family histories worldwide.</p></div>
-      </section>
     </div>
   )
 }

@@ -34,5 +34,6 @@ button {
   transition: all 0.3s ease;
 }
 button:hover { 
-  background-color:var(--color-accent); 
+  background-color:var(--color-accent);
+  letter-spacing: 1px; 
 }

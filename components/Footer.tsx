@@ -1,17 +1,162 @@
+'use client'
 import styles from './components.module.css'
 import Link from 'next/link'
+import Image from 'next/image';
+import { Icon } from '../public/images/index'
+import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import Button from './Button';
 
 export default function Footer(){
+
+  // =========================================================
+   const [loggedIn, setLoggedIn] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const checkLoginStatus = () => {
+    try {
+      const flag = localStorage.getItem('ft_logged_in')
+      if (flag === '1') {
+        setLoggedIn(true)
+        return
+      }
+    } catch (e) {
+      // ignore localStorage errors
+    }
+
+    // fallback: detect session cookie
+    const cookies = typeof document !== 'undefined' ? document.cookie.split(';').map(c => c.trim()) : []
+    const hasSession = cookies.some(c => c.startsWith('familytree_session='))
+    setLoggedIn(hasSession)
+  }
+
+  useEffect(() => {
+    checkLoginStatus()
+
+    const onAuthChange = () => setTimeout(checkLoginStatus, 120)
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'ft_last_changed') setTimeout(checkLoginStatus, 60)
+    }
+
+    window.addEventListener('authChange', onAuthChange)
+    window.addEventListener('storage', onStorage)
+
+    return () => {
+      window.removeEventListener('authChange', onAuthChange)
+      window.removeEventListener('storage', onStorage)
+    }
+  }, [pathname])
+
+  // Logout handler
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' })
+    } catch (err) {
+      console.error('Logout error:', err)
+    }
+
+    // clear client flags
+    try {
+      localStorage.removeItem('ft_logged_in')
+      localStorage.setItem('ft_last_changed', String(Date.now()))
+    } catch (e) {}
+
+    // notify UI
+    window.dispatchEvent(new Event('authChange'))
+
+    // redirect home
+    router.push('/')
+  }
+  // =========================================================
+
   return(
-    <div>
+    <section>
       <footer className={styles.footer}>
-        <p>© 2025 FamilyTree - Preserve Your Legacy</p>
-        <Link 
-          href= '/admin/password'
-          style={{color: 'white'}}>
-            admin-page
-        </Link>
+        {loggedIn ? (
+          <>
+            <div className={styles.footerContent}>
+              <div className={styles.footerLogo}>
+                <Link href='/homePage'><Image src={Icon} alt="Footer Logo" width={100} height={100}/></Link>  
+              </div>  
+              <div className={styles.navLinks}>
+                <h3>Links</h3>
+                <Link href='/homePage'>Home</Link>  
+                <Link href='/aboutPage'>About</Link>  
+                <Link href='/dashboard'>Dashboard</Link>  
+                <Button onClick={handleLogout} tag={'Logout'} className={styles.logout} />
+              </div>  
+              <div className={styles.footerText}>
+                <p>Reserve Your Family Legacy and Follow Up on Your Linage and Heritage.</p>
+                <div className={styles.socials}>
+                  <Link href={'/'} className={styles.socialsLink}>
+                    <Image src={Icon} alt='Facebook' width={0} height={0}/>
+                  </Link>
+                  <Link href={'/'} className={styles.socialsLink}>
+                    <Image src={Icon} alt='Instagram' width={0} height={0}/>
+                  </Link>
+                  <Link href={'/'} className={styles.socialsLink}>
+                    <Image src={Icon} alt='TikTok' width={0} height={0}/>
+                  </Link>
+                </div>
+                <p className={styles.connect}>Connect With Us On Social Media.</p>
+              </div>
+              <div className={styles.footerPlanLogo}>
+                <Link href='/homePage'>
+                  <Image src={Icon} alt="Footer Logo" width={100} height={100}/>
+                  <p className={styles.upgrade}>Click to upgrade to Family Legacy Plan for more features.</p> 
+                </Link> 
+              </div>
+            </div>
+            <div className={styles.copyright}>
+              <p>© 2025 TheFamilyTree - Produced By Homes 'N' Codes.</p>
+            </div>
+          </>
+        )
+        : (
+          <>
+            <div className={styles.footerContent}>
+              <div className={styles.footerLogo}>
+                <Link href='/'><Image src={Icon} alt="Footer Logo" width={100} height={100}/></Link>  
+              </div>  
+              <div className={styles.navLinks}>
+                <h3>Links</h3>
+                <Link href='/'>Home</Link>  
+                <Link href='/about'>About</Link>  
+                <Link href='/contact'>Contact</Link>  
+                <Link href='/auth/login'>Login</Link>    
+                <Link href='/auth/register'>Register</Link>    
+                <Link href= '/admin/password' className={styles.adminLink}>Admin</Link>
+              </div>  
+              <div className={styles.plans}>
+                <h3>Plans</h3>
+                <Link href={'/'}>Family Heritage</Link>
+                <Link href={'/'}>Family Legacy</Link>
+                <Link href={'/'}>Family Premium</Link>
+              </div>
+              <div className={styles.footerText}>
+                <p>Reserve Your Family Legacy and Follow Up on Your Linage and Heritage.</p>
+                <div className={styles.socials}>
+                  <Link href={'/'} className={styles.socialsLink}>
+                    <Image src={Icon} alt='Facebook' width={0} height={0}/>
+                  </Link>
+                  <Link href={'/'} className={styles.socialsLink}>
+                    <Image src={Icon} alt='Instagram' width={0} height={0}/>
+                  </Link>
+                  <Link href={'/'} className={styles.socialsLink}>
+                    <Image src={Icon} alt='TikTok' width={0} height={0}/>
+                  </Link>
+                </div>
+                <p className={styles.connect}>Connect With Us On Social Media.</p>
+              </div>
+            </div>
+            <div className={styles.copyright}>
+              <p>© 2025 TheFamilyTree - Produced By Homes 'N' Codes.</p>
+            </div>
+          </>
+        )
+      }
       </footer>
-    </div>
+    </section>
   )
 }

@@ -304,7 +304,8 @@
     flex-direction: column;
     text-align: center;
     height: 80vh;
-    padding: 2em 1em;
+    padding: 0 1em;
+    margin-top: -2em;
   }
   .heroText {
     width: 100%;
@@ -312,7 +313,7 @@
     align-items: center;
   }
   .heroText h1{
-    font-size: 1.85rem;
+    font-size: 1.5rem;
   }
   .heroBgImage {
     width: 100%;
@@ -352,6 +353,10 @@
     font-size: 1rem;
     text-align: left;
   }
+  .testifierText span{
+    color: var(--color-secondary);
+    font-weight: bold;
+  }
   .testimonyContainer{
     gap: 0;
     padding: 0 1em;
@@ -359,6 +364,7 @@
   .testimonyImage {
     width: 50%;
     height: 50%;
+    margin-right: -2em;
   }
   .testimonyImage img{
     width: 100%;
