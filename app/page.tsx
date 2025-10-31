@@ -12,7 +12,9 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
-  const goToBasicPlanRegistration = () => router.push("/basic");
+  const goToFamilyHeritagePlan = () => router.push("/familyHeritagePlan");
+  const goToFamilyLegacyPlan = () => router.push("/familyLegacyPlan");
+  const goToFamilyPremiumPlan = () => router.push("/familyPremiumPlan");
   const goToRegistration = () => router.push("/auth/register");
   
 
@@ -146,7 +148,7 @@ export default function Home() {
             <li>Event Calenders</li>
             <li>1GB Secured Storage</li>
           </ul>
-          <Button tag={'Request Plan'} onClick={goToBasicPlanRegistration}/>
+          <Button tag={'Request Plan'} onClick={goToFamilyHeritagePlan}/>
         </div>
         <div className={styles.plan}>
           <h2>Family Legacy Plan</h2>
@@ -158,7 +160,7 @@ export default function Home() {
             <li>Event Calenders</li>
             <li>100GB Secured Storage</li>
           </ul>
-          <Button tag={'Request Plan'} onClick={goToBasicPlanRegistration}/>
+          <Button tag={'Request Plan'} onClick={goToFamilyLegacyPlan}/>
         </div>
         <div className={styles.plan}>
           <h2>Family Premium Plan</h2>
@@ -170,7 +172,7 @@ export default function Home() {
             <li>Event Calenders</li>
             <li>Unlimited Secured Storage</li>
           </ul>
-          <Button tag={'Request Plan'} onClick={goToBasicPlanRegistration}/>
+          <Button tag={'Request Plan'} onClick={goToFamilyPremiumPlan}/>
         </div>
       </div>
     </section>

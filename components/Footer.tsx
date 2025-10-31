@@ -102,7 +102,7 @@ export default function Footer(){
                 <p className={styles.connect}>Connect With Us On Social Media.</p>
               </div>
               <div className={styles.footerPlanLogo}>
-                <Link href='/homePage'>
+                <Link href='/familyLegacyPlan'>
                   <Image src={Icon} alt="Footer Logo" width={100} height={100}/>
                   <p className={styles.upgrade}>Click to upgrade to Family Legacy Plan for more features.</p> 
                 </Link> 
@@ -130,9 +130,9 @@ export default function Footer(){
               </div>  
               <div className={styles.plans}>
                 <h3>Plans</h3>
-                <Link href={'/'}>Family Heritage</Link>
-                <Link href={'/'}>Family Legacy</Link>
-                <Link href={'/'}>Family Premium</Link>
+                <Link href={'/familyHeritagePlan'}>Family Heritage</Link>
+                <Link href={'/familyLegacyPlan'}>Family Legacy</Link>
+                <Link href={'/familyPremiumPlan'}>Family Premium</Link>
               </div>
               <div className={styles.footerText}>
                 <p>Reserve Your Family Legacy and Follow Up on Your Linage and Heritage.</p>

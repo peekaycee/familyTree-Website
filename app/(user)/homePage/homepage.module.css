@@ -122,8 +122,8 @@
 .howItWorksCard {
   background: #fff;
   color: var(--color-black-text);
-  width: 25%;
-  padding: 3em 1em;
+  width: 28%;
+  padding: 2.5em 0.5em;
   border-radius: 10px;
   font-size: 1.1rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
