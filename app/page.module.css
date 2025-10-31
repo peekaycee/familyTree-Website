@@ -138,29 +138,50 @@
   height: auto;
   background: var(--color-primary);
   color: var(--color-white-text);
-  padding: 3em 0 5em;
+  padding: 3em 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+/* ========================= */
+.testimonyContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.testimonySlider {
+  display: flex;
+}
+.testimonyItem {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 3.5em;
+  align-items: center;
+  justify-content: center;
+}
+/* ========================= */
 .testimonials h1{
   margin-bottom: 1em;
 }
 .testimonies,
 .testimony{
-  gap: 3em;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .testimonyImage{
-  width: fit-content;
-  height: fit-content;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
   background: white;
   border-radius: 50%;
 }
 .testimony img{
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
 }
 .testifierText {
@@ -223,7 +244,6 @@
   gap: 2em;
 }
 
-
 /* =========================
    RESPONSIVE DESIGN
 ========================= */
@@ -281,12 +301,18 @@
   .howItWorksCard {
     width: 45%;
   }
-
+  
   .testimonies {
     flex-direction: column;
   }
-
-  .planCards {
+  .testimonyItem {
+    gap: 2em;
+  }
+  .testimonyImage{
+    width: 200px;
+    height: 200px;
+  }
+ .planCards {
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -357,14 +383,14 @@
     color: var(--color-secondary);
     font-weight: bold;
   }
-  .testimonyContainer{
-    gap: 0;
+  .testimonyItem{
+    margin-left: 0.2em;
     padding: 0 1em;
   }
   .testimonyImage {
     width: 50%;
     height: 50%;
-    margin-right: -2em;
+    margin-right: -2.5em;
   }
   .testimonyImage img{
     width: 100%;
