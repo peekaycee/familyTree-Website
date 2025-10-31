@@ -1,6 +1,5 @@
-// /app/auth/login/page.tsx
 'use client'
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import styles from '../auth.module.css'
 
@@ -44,25 +43,27 @@ export default function Login() {
     <section className={styles.authPage}>
       <div className={styles.Container}>
         <h2>Login to Your FamilyTree Account</h2>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <input
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            type="email"
-            placeholder="Email"
-            required
-            autoFocus
-          />
-          <input
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-            required
-          />
-          <button type="submit">Login</button>
-          {error && <p className={styles.errorMessage}>{error}</p>}
-        </form>
+        <Suspense fallback={<div>Loading...</div>}>
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <input
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              type="email"
+              placeholder="Email"
+              required
+              autoFocus
+            />
+            <input
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              type="password"
+              placeholder="Password"
+              required
+            />
+            <button type="submit">Login</button>
+            {error && <p className={styles.errorMessage}>{error}</p>}
+          </form>
+        </Suspense>
         <p>
           Don’t have an account? <a href="/auth/register">Register</a>
         </p>
