@@ -1,10 +1,9 @@
-// /app/auth/login/page.tsx
 'use client'
 import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import styles from '../auth.module.css'
 
-export default function Login() {
+function LoginContent() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -22,16 +21,13 @@ export default function Login() {
     })
 
     if (res.ok) {
-      // update client-visible UI flag
       try {
         localStorage.setItem('ft_logged_in', '1')
         localStorage.setItem('ft_last_changed', String(Date.now()))
       } catch (e) {}
 
-      // notify UI
       window.dispatchEvent(new Event('authChange'))
 
-      // redirect back or to dashboard
       const redirectTo = searchParams.get('from') || '/homePage'
       router.push(redirectTo)
     } else {
@@ -41,29 +37,35 @@ export default function Login() {
   }
 
   return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <input
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        type="email"
+        placeholder="Email"
+        required
+        autoFocus
+      />
+      <input
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        type="password"
+        placeholder="Password"
+        required
+      />
+      <button type="submit">Login</button>
+      {error && <p className={styles.errorMessage}>{error}</p>}
+    </form>
+  )
+}
+
+export default function Login() {
+  return (
     <section className={styles.authPage}>
       <div className={styles.Container}>
         <h2>Login to Your FamilyTree Account</h2>
         <Suspense fallback={<div>Loading...</div>}>
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <input
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              type="email"
-              placeholder="Email"
-              required
-              autoFocus
-            />
-            <input
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              type="password"
-              placeholder="Password"
-              required
-            />
-            <button type="submit">Login</button>
-            {error && <p className={styles.errorMessage}>{error}</p>}
-          </form>
+          <LoginContent />
         </Suspense>
         <p>
           Don’t have an account? <a href="/auth/register">Register</a>
