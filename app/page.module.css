@@ -300,8 +300,7 @@
   }
   .howItWorksCard {
     width: 45%;
-  }
-  
+  } 
   .testimonies {
     flex-direction: column;
   }

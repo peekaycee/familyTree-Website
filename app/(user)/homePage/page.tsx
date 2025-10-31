@@ -92,31 +92,44 @@ export default function HomePage() {
 
       {/* Testimonials */}
       <section className={styles.testimonials}>
-      <h1>Family Stories</h1>
-
-      <div className={styles.testimonyContainer}>
-        <AnimatePresence mode="wait">
+        <h1>Family Stories</h1>
+        <div className={styles.testimonyContainer}>
           <motion.div
-            key={testimonies[current].id}
             className={styles.testimony}
-            initial={{ x: 200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -200, opacity: 0 }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           >
-            <div className={styles.testimonyImage}>
-              <Image src={testimonies[current].image} alt="testifier" width={200} height={200} />
-            </div>
-            <div className={styles.testifierText}>
-              <p>{testimonies[current].text}</p>
-              <p>
-                <span>-</span> <em>{testimonies[current].name}</em>
-              </p>
-            </div>
+            <motion.div
+              animate={{ x: -current * 100 + '%' }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              className={styles.testimonySlider}
+              style={{
+                display: 'flex',
+                width: `${testimonies.length * 100}%`,
+              }}
+            >
+              {testimonies.map((t) => (
+                <div
+                  key={t.id}
+                  className={styles.testimonyItem}
+                  style={{ width: '100%', flexShrink: 0 }}
+                >
+                  <div className={styles.testimonyImage}>
+                    <Image src={t.image} alt="testifier" width={200} height={200} />
+                  </div>
+                  <div className={styles.testifierText}>
+                    <p>{t.text}</p>
+                    <p>
+                      - <em>{t.name}</em>
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
-        </AnimatePresence>
-      </div>
-    </section>
+        </div>
+      </section>
     
     {/* PLANS */}
     <section className={styles.plans}>
