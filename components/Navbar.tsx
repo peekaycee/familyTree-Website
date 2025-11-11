@@ -99,14 +99,15 @@ export default function Navbar() {
       <div className={styles.links}>
         {loggedIn ? (
           <>
-            <Link href="/homePage">Home</Link>
-            <Link href="/aboutPage">About</Link>
-            <Link href="/dashboard">Dashboard</Link>
+            <Link href="/basic/homePage">Home</Link>
+            <Link href="/basic/aboutPage">About</Link>
+            <Link href="/basic/dashboard">Dashboard</Link>
             <Button
               onClick={handleLogout}
               tag={'Logout'}
               className={styles.logout}
             />
+            <Link href='/basic/dashboard/settings'>SetIcon</Link>
           </>
         ) : (
           <>
@@ -130,15 +131,16 @@ export default function Navbar() {
       >
         {loggedIn ? (
           <>
-            <Link href="/homePage" onClick={closeMenu}>Home</Link>
-            <Link href="/aboutPage" onClick={closeMenu}>About</Link>
-            <Link href="/dashboard" onClick={closeMenu}>Dashboard</Link>
+            <Link href="/basic/homePage" onClick={closeMenu}>Home</Link>
+            <Link href="/basic/aboutPage" onClick={closeMenu}>About</Link>
+            <Link href="/basic/dashboard" onClick={closeMenu}>Dashboard</Link>
             <button
               onClick={() => { handleLogout(); closeMenu(); }}
               className={styles.mobileLogout}
             >
               Logout
             </button>
+            <Link href='/basic/dashboard/settings'>Theme</Link>
           </>
         ) : (
           <>

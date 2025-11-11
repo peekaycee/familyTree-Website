@@ -28,7 +28,7 @@ function LoginContent() {
 
       window.dispatchEvent(new Event('authChange'))
 
-      const redirectTo = searchParams.get('from') || '/homePage'
+      const redirectTo = searchParams.get('from') || '/basic/homePage'
       router.push(redirectTo)
     } else {
       const body = await res.json().catch(() => ({}))

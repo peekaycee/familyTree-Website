@@ -2,11 +2,11 @@
 
 import styles from './homepage.module.css'
 import Image from 'next/image';
-import { Icon } from '../../../public/images/index';
+import { Icon } from '../../../../../public/images/index';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { testimonies } from '../../constants/Testimonies';
-import Button from '../../../components/Button';
+import { testimonies } from '../../../../constants/Testimonies';
+import Button from '../../../../../components/Button';
 import { useRouter } from "next/navigation";
 
 export default function HomePage() {
@@ -32,6 +32,7 @@ export default function HomePage() {
         <div className={styles.heroText}>
           <h1>Preserve Your Legacy, Share Your Story. (Users)</h1>
           <p>A secure, private space to celebrate your family heritage.</p>
+          <p>Classic Theme</p>
           <Button tag={'Start Your Family Tree'} onClick={goToDashboard}/>
         </div>
         <div className={styles.heroBgImage}>

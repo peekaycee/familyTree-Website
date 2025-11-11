@@ -10,6 +10,7 @@
   background-color: var(--color-primary); 
   background-blend-mode: overlay; 
 }
+/* I love you ~ ch  */
 .heroText{
   width: 45%;
   height: 100%;
@@ -21,7 +22,7 @@
 }
 .heroBgImage{
   flex: 1;
-  background: url('../public/images/pee2.png') center no-repeat;
+  background: url('../../../../../public/images/pee2.png') center no-repeat;
   background-size: contain;
 }
 .hero h1 { 
@@ -160,8 +161,6 @@
   gap: 3.5em;
   align-items: center;
   justify-content: center;
-  width: 100%; 
-  flex-shrink: 0;
 }
 /* ========================= */
 .testimonials h1{
@@ -245,6 +244,7 @@
   gap: 2em;
 }
 
+
 /* =========================
    RESPONSIVE DESIGN
 ========================= */
@@ -301,20 +301,21 @@
   }
   .howItWorksCard {
     width: 45%;
-  } 
+  }
+
   .testimonies {
     flex-direction: column;
   }
+
   .testimonyItem {
     gap: 2em;
-    /* width: 100%; 
-    flex-shrink: 0; */
   }
   .testimonyImage{
     width: 200px;
     height: 200px;
   }
- .planCards {
+
+  .planCards {
     flex-wrap: wrap;
     justify-content: center;
   }

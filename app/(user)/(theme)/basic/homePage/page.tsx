@@ -1,21 +1,21 @@
 'use client';
 
-import styles from './page.module.css'
+import styles from './homepage.module.css'
 import Image from 'next/image';
-import { Icon } from '../public/images/index';
+import { Icon } from '../../../../../public/images/index';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { testimonies } from './constants/Testimonies';
-import Button from '../components/Button';
+import { testimonies } from '../../../../constants/Testimonies';
+import Button from '../../../../../components/Button';
 import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function HomePage() {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const goToFamilyHeritagePlan = () => router.push("/familyHeritagePlan");
   const goToFamilyLegacyPlan = () => router.push("/familyLegacyPlan");
   const goToFamilyPremiumPlan = () => router.push("/familyPremiumPlan");
-  const goToRegistration = () => router.push("/auth/register");
+  const goToDashboard = () => router.push("/dashboard");
   
 
   // Automatically change testimonial every 3 seconds
@@ -28,114 +28,68 @@ export default function Home() {
 
   return (
     <section className={styles.homepage}>
-      <motion.section 
-        className={styles.hero}
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
+      <section className={styles.hero}>
         <div className={styles.heroText}>
-          <h1>Preserve Your Legacy, Share Your Story.</h1>
+          <h1>Preserve Your Legacy, Share Your Story. (Users)</h1>
           <p>A secure, private space to celebrate your family heritage.</p>
-          <Button tag={'Start Your Family Tree'} onClick={goToRegistration}/>
+          <p>Basic Theme</p>
+          <Button tag={'Start Your Family Tree'} onClick={goToDashboard}/>
         </div>
         <div className={styles.heroBgImage}>
         </div>
-      </motion.section>
+      </section>
       
       {/* Why Choose Family Tree */}
       <section className={styles.features}>
         <h1>Why Choose Family Tree</h1>
         <div className={styles.cards}>
-          <motion.div 
-            className={styles.card}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          <div className={styles.card}>
             <div className={styles.featureIcon}>
               <Image src={Icon} alt="Features Image" width={40} height={40} />
             </div>
             <h3>Preserve Memories</h3>
             <p>Upload family photos and documents to protect your legacy.</p>
-          </motion.div>
-          <motion.div 
-            className={styles.card}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          </div>
+          <div className={styles.card}>
             <div className={styles.featureIcon}>
               <Image src={Icon} alt="Features Image" width={40} height={40} />
             </div>
             <h3>Connect Generations</h3>
             <p>Explore relationships and build your family tree interactively.</p>
-          </motion.div>
-          <motion.div 
-            className={styles.card}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          </div>
+          <div className={styles.card}>
             <div className={styles.featureIcon}>
               <Image src={Icon} alt="Features Image" width={40} height={40} />
             </div>
             <h3>Secure Your History</h3>
             <p>Your family’s private archive, encrypted and backed up in the cloud.</p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Video Clips */}
       <section className={styles.videoClip}>
         <h1>Visualize Your Family Legacy</h1>
-        <motion.div 
-          className={styles.video}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+        <div className={styles.video}>
           <video muted loop autoPlay>
             <source src="/videos/Hema-vid.mp4" type="video/mp4"></source>
           </video>
-        </motion.div>
+        </div>
       </section>
       
       {/* How It Works */}
       <section className={styles.howItWorks}>
         <h1>How It Works</h1>
         <div className={styles.howItWorksCards}>
-          <motion.div 
-            className={styles.howItWorksCard}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          <div className={styles.howItWorksCard}>
             <p><span>1.</span> Create Your Family Tree</p>
-          </motion.div>
-          <motion.div 
-            className={styles.howItWorksCard}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          </div>
+          <div className={styles.howItWorksCard}>
             <p><span>2.</span> Invite Family Members</p>
-          </motion.div>
-          <motion.div 
-            className={styles.howItWorksCard}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          </div>
+          <div className={styles.howItWorksCard}>
             <p><span>3.</span> Preserve and Share Memories</p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -162,6 +116,7 @@ export default function Home() {
                 <div
                   key={t.id}
                   className={styles.testimonyItem}
+                  style={{ width: '100%', flexShrink: 0 }}
                 >
                   <div className={styles.testimonyImage}>
                     <Image src={t.image} alt="testifier" width={200} height={200} />
@@ -178,18 +133,12 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
+    
     {/* PLANS */}
     <section className={styles.plans}>
       <h1>Our plans</h1>
       <div className={styles.planCards}>
-        <motion.div 
-          className={styles.plan}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+        <div className={styles.plan}>
           <h2>Family Heritage Plan</h2>
           <p>NGN350,000 Setup + NGN100,000/Year</p>
           <ul>
@@ -200,14 +149,8 @@ export default function Home() {
             <li>1GB Secured Storage</li>
           </ul>
           <Button tag={'Request Plan'} onClick={goToFamilyHeritagePlan}/>
-        </motion.div>
-        <motion.div 
-          className={styles.plan}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+        </div>
+        <div className={styles.plan}>
           <h2>Family Legacy Plan</h2>
           <p>NGN500,000 Setup + NGN150,000/Year</p>
           <ul>
@@ -218,14 +161,8 @@ export default function Home() {
             <li>100GB Secured Storage</li>
           </ul>
           <Button tag={'Request Plan'} onClick={goToFamilyLegacyPlan}/>
-        </motion.div>
-        <motion.div 
-          className={styles.plan}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+        </div>
+        <div className={styles.plan}>
           <h2>Family Premium Plan</h2>
           <p>NGN700,000 Setup + NGN200,000/Year</p>
           <ul>
@@ -236,7 +173,7 @@ export default function Home() {
             <li>Unlimited Secured Storage</li>
           </ul>
           <Button tag={'Request Plan'} onClick={goToFamilyPremiumPlan}/>
-        </motion.div>
+        </div>
       </div>
     </section>
   </section>

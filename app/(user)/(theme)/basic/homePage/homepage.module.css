@@ -22,7 +22,7 @@
 }
 .heroBgImage{
   flex: 1;
-  background: url('../../../public/images/pee2.png') center no-repeat;
+  background: url('../../../../../public/images/pee2.png') center no-repeat;
   background-size: contain;
 }
 .hero h1 { 

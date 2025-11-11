@@ -3,14 +3,14 @@ import styles from './components.module.css'
 import Link from 'next/link'
 import Image from 'next/image';
 import { Icon } from '../public/images/index'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Button from './Button';
 
 export default function Footer(){
 
-  // =========================================================
-   const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
 
@@ -68,7 +68,6 @@ export default function Footer(){
     // redirect home
     router.push('/')
   }
-  // =========================================================
 
   return(
     <section>
@@ -77,13 +76,13 @@ export default function Footer(){
           <>
             <div className={styles.footerContent}>
               <div className={styles.footerLogo}>
-                <Link href='/homePage'><Image src={Icon} alt="Footer Logo" width={100} height={100}/></Link>  
+                <Link href='/basic/homePage'><Image src={Icon} alt="Footer Logo" width={100} height={100}/></Link>  
               </div>  
               <div className={styles.navLinks}>
                 <h3>Links</h3>
-                <Link href='/homePage'>Home</Link>  
-                <Link href='/aboutPage'>About</Link>  
-                <Link href='/dashboard'>Dashboard</Link>  
+                <Link href='/basic/homePage'>Home</Link>  
+                <Link href='/basic/aboutPage'>About</Link>  
+                <Link href='/basic/dashboard'>Dashboard</Link>  
                 <Button onClick={handleLogout} tag={'Logout'} className={styles.logout} />
               </div>  
               <div className={styles.footerText}>
@@ -102,10 +101,24 @@ export default function Footer(){
                 <p className={styles.connect}>Connect With Us On Social Media.</p>
               </div>
               <div className={styles.footerPlanLogo}>
-                <Link href='/familyLegacyPlan'>
-                  <Image src={Icon} alt="Footer Logo" width={100} height={100}/>
-                  <p className={styles.upgrade}>Click to upgrade to Family Legacy Plan for more features.</p> 
-                </Link> 
+                <motion.div 
+                  animate={{
+                      scale: [1, 1.2, 1], // zoom in then back
+                    }}
+                    transition={{
+                      duration: 2,        // 2 seconds for one cycle
+                      ease: 'easeInOut',  // smooth easing
+                      repeat: Infinity,   // loop forever
+                    }}
+                    style={{
+                      display: 'inline-block',
+                    }}  
+                  >
+                    <Link href='/familyLegacyPlan'>
+                      <Image src={Icon} alt="Footer Logo" width={100} height={100}/>
+                    </Link> 
+                </motion.div>
+                <p className={styles.upgrade}>Click to upgrade to Family Legacy Plan for more features.</p> 
               </div>
             </div>
             <div className={styles.copyright}>
@@ -148,6 +161,10 @@ export default function Footer(){
                   </Link>
                 </div>
                 <p className={styles.connect}>Connect With Us On Social Media.</p>
+                <form className={styles.newsLetter}>
+                  <input type="text" placeholder="Add email to subscribe to our news letter" className={styles.subscribeEmail}/>
+                  <input type="submit" value="Submit" className={styles.subscribeSubmit}/>
+                </form>
               </div>
             </div>
             <div className={styles.copyright}>
