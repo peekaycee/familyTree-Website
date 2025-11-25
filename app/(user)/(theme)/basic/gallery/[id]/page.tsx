@@ -1,7 +1,5 @@
 "use client";
 
-// import { notFound } from "next/navigation";
-import { NotFound } from "../../../../../notFound";
 import { galleryItems } from "../../../../../../lib/gallery-data";
 import { motion } from "framer-motion";
 import styles from "./gallerydetail.module.css";
@@ -12,9 +10,8 @@ export default function GalleryDetail({ params }: { params: { id: string } }) {
   const numericId = Number(params.id);
   const item = galleryItems.find((x) => x.id === numericId);
 
-  // if (!item) return notFound();
-  if (!item) return <NotFound />;
-
+  if (!item) return notFound();
+  
   return (
     <motion.div 
       className={styles.wrapper}
