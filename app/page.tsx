@@ -32,7 +32,7 @@ export default function Home() {
         className={styles.hero}
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.2 }}
       >
         <div className={styles.heroText}>
           <h1>Preserve Your Legacy, Share Your Story.</h1>
@@ -51,7 +51,7 @@ export default function Home() {
             className={styles.card}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.2 }}
             viewport={{ once: true }}
           >
             <div className={styles.featureIcon}>
@@ -64,7 +64,7 @@ export default function Home() {
             className={styles.card}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.2 }}
             viewport={{ once: true }}
           >
             <div className={styles.featureIcon}>
@@ -77,7 +77,7 @@ export default function Home() {
             className={styles.card}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.2 }}
             viewport={{ once: true }}
           >
             <div className={styles.featureIcon}>
@@ -96,7 +96,7 @@ export default function Home() {
           className={styles.video}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.2 }}
           viewport={{ once: true }}
         >
           <video muted loop autoPlay>
@@ -113,7 +113,7 @@ export default function Home() {
             className={styles.howItWorksCard}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.2 }}
             viewport={{ once: true }}
           >
             <p><span>1.</span> Create Your Family Tree</p>
@@ -122,7 +122,7 @@ export default function Home() {
             className={styles.howItWorksCard}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.2 }}
             viewport={{ once: true }}
           >
             <p><span>2.</span> Invite Family Members</p>
@@ -131,7 +131,7 @@ export default function Home() {
             className={styles.howItWorksCard}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.2 }}
             viewport={{ once: true }}
           >
             <p><span>3.</span> Preserve and Share Memories</p>
@@ -187,7 +187,7 @@ export default function Home() {
           className={styles.plan}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.2 }}
           viewport={{ once: true }}
         >
           <h2>Family Heritage Plan</h2>
@@ -205,7 +205,7 @@ export default function Home() {
           className={styles.plan}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.2 }}
           viewport={{ once: true }}
         >
           <h2>Family Legacy Plan</h2>
@@ -223,7 +223,7 @@ export default function Home() {
           className={styles.plan}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.2 }}
           viewport={{ once: true }}
         >
           <h2>Family Premium Plan</h2>
@@ -240,5 +240,5 @@ export default function Home() {
       </div>
     </section>
   </section>
-  )
+ )
 }

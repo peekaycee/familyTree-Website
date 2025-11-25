@@ -1,12 +1,11 @@
-import styles from './family-tree.module.css'
+'use client';
+import FamilyTree from '../../../../../../components/FamilyTree';
 
-export default function FamilyTree() {
+export default function Page() {
   return (
-    <div className={styles.container}>
-      <h1>Family Tree</h1>
-      <p>Interactive tree view placeholder. Click nodes to view details and add members.</p>
-      <div className={styles.placeholder}>[Family Tree Visualization Here]</div>
-      <button className={styles.cta}>Add Member</button>
-    </div>
-  )
+    <main>
+      <h1>Family Tree App</h1>
+      <FamilyTree />
+    </main>
+  );
 }

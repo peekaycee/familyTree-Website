@@ -7,32 +7,49 @@ function LoginContent() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+    setLoading(true)
 
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    })
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      })
 
-    if (res.ok) {
-      try {
+      const result = await res.json().catch(() => ({}))
+      setLoading(false)
+
+      if (!res.ok) {
+        throw new Error(result?.message || 'Login failed')
+      }
+
+      const { user, session } = result
+
+      // ✅ Store Supabase session if available
+      if (session) {
+        localStorage.setItem('supabase_session', JSON.stringify(session)) // <-- save session
         localStorage.setItem('ft_logged_in', '1')
         localStorage.setItem('ft_last_changed', String(Date.now()))
-      } catch (e) {}
+        window.dispatchEvent(new Event('authChange')) // <-- notify FamilyBuilder
+      }
 
+
+      localStorage.setItem('ft_logged_in', '1')
+      localStorage.setItem('ft_last_changed', String(Date.now()))
       window.dispatchEvent(new Event('authChange'))
 
-      const redirectTo = searchParams.get('from') || '/basic/homePage'
-      router.push(redirectTo)
-    } else {
-      const body = await res.json().catch(() => ({}))
-      setError(body?.message || 'Login failed')
+      router.push('/basic/homePage')
+      
+    } catch (err: any) {
+      setError(err.message || 'Login failed')
+      setLoading(false)
     }
   }
 
@@ -53,7 +70,9 @@ function LoginContent() {
         placeholder="Password"
         required
       />
-      <button type="submit">Login</button>
+      <button type="submit" disabled={loading}>
+        {loading ? 'Logging in…' : 'Login'}
+      </button>
       {error && <p className={styles.errorMessage}>{error}</p>}
     </form>
   )

@@ -16,25 +16,36 @@ export default function Register() {
     setError('')
     setLoading(true)
 
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
-    })
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      })
 
-    setLoading(false)
+      const result = await res.json().catch(() => ({}))
+      setLoading(false)
 
-    if (res.ok) {
-      try {
-        localStorage.setItem('ft_logged_in', '1')
-        localStorage.setItem('ft_last_changed', String(Date.now()))
-      } catch (e) {}
+      if (!res.ok) {
+        throw new Error(result?.message || 'Registration failed')
+      }
 
+      // ✅ Extract user/session from backend response
+      const { user, session } = result
+
+      // Save session in localStorage if it exists
+      if (session) {
+        localStorage.setItem('supabase_session', JSON.stringify(session))
+      }
+
+      localStorage.setItem('ft_logged_in', '1')
+      localStorage.setItem('ft_last_changed', String(Date.now()))
       window.dispatchEvent(new Event('authChange'))
+
       router.push('/dashboard')
-    } else {
-      const body = await res.json().catch(() => ({}))
-      setError(body?.message || 'Registration failed')
+    } catch (err: any) {
+      setError(err.message || 'Registration failed')
+      setLoading(false)
     }
   }
 
@@ -43,13 +54,36 @@ export default function Register() {
       <div className={styles.Container}>
         <h2>Create Your FamilyTree Account</h2>
         <form className={styles.form} onSubmit={handleRegister}>
-          <input type="text" placeholder="Full Name" value={name} onChange={e => setName(e.target.value)} required autoFocus />
-          <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
-          <button type="submit" disabled={loading}>{loading ? 'Registering...' : 'Register'}</button>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            required
+            autoFocus
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </button>
           {error && <p className={styles.errorMessage}>{error}</p>}
         </form>
-        <p>Already have an account? <a href="/auth/login">Login</a></p>
+        <p>
+          Already have an account? <a href="/auth/login">Login</a>
+        </p>
       </div>
     </section>
   )

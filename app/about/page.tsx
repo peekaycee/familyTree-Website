@@ -19,7 +19,7 @@ export default function About() {
         className={styles.heroSection}
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.2 }}
       >
         <h1>About TheFamilyTree</h1>
         <p>Connecting generations through stories, love, and legacy.</p>
@@ -30,14 +30,14 @@ export default function About() {
         className={styles.storySection}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: 'easeOut' }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <div className={styles.storyContainer}>
           <motion.div
             className={styles.storyImage}
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
             <Image
               src={HeroImage}
